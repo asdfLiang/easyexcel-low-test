@@ -48,7 +48,6 @@ public class StyleWriteHandler extends LongestMatchColumnWidthStyleStrategy {
         CellStyle cellStyle = cell.getSheet().getWorkbook().createCellStyle();
         cellStyle.setLocked(!StringUtils.isEmpty(cell.getStringCellValue()));
         cell.setCellStyle(cellStyle);
-        cell.getSheet().protectSheet("123");
 
         if (cell.getCellStyle().getLocked()) {
             Font font = cell.getSheet().getWorkbook().createFont();
