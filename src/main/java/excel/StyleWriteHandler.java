@@ -37,18 +37,21 @@ public class StyleWriteHandler extends LongestMatchColumnWidthStyleStrategy {
                 relativeRowIndex,
                 isHead);
 
-        if (isHead) {
+        if (isHead) { // 设置表头属性
             headerStyle(cell);
-        } else {
+        } else { // 设置数据行属性
             contentStyle(cell);
         }
     }
 
     private void contentStyle(Cell cell) {
+        // 创建新的单元格样式
         CellStyle cellStyle = cell.getSheet().getWorkbook().createCellStyle();
         // 复制原单元格的样式
         cellStyle.cloneStyleFrom(cell.getCellStyle());
+        /* !! 注意：这行就是解锁单元格的代码，locked == true为锁定，locked == false为不锁定 */
         cellStyle.setLocked(!StringUtils.isEmpty(cell.getStringCellValue()));
+        // 把新的单元格样式设置为当前单元格样式
         cell.setCellStyle(cellStyle);
 
         if (cell.getCellStyle().getLocked()) {
